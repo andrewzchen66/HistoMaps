@@ -1,14 +1,26 @@
-import '../styles/main.css';
+import "../styles/main.css";
+import { CommandInfo } from "./REPL.types";
 
-interface REPLHistoryProps{
-    history: string[]
+interface REPLHistoryProps {
+  isBrief: boolean;
+  history: CommandInfo[];
 }
-export function REPLHistory(props : REPLHistoryProps) {
-    return (
-        <div className="repl-history">
-            
-            {/* This is where command history will go */}
-            {props.history.map((command, index) => <p>{command}</p>)}
+export function REPLHistory({ isBrief, history }: REPLHistoryProps) {
+  return (
+    <div className="repl-history">
+      {/* This is where command history will go */}
+      {history.map((commandInfo, index) => (
+        <div key={index}>
+          {commandInfo.isBrief ? (
+            <p>{commandInfo.output}</p>
+          ) : (
+            <>
+              <p>{"Command: " + commandInfo.command}</p>
+              <p>{"Output: " + commandInfo.output}</p>
+            </>
+          )}
         </div>
-    );
+      ))}
+    </div>
+  );
 }
