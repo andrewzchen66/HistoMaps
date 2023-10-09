@@ -1,5 +1,5 @@
 export interface CommandInfo{
   command: string,
-  output: string,
-  isBrief: boolean
+  output: string | string[][],
+  isBrief: boolean,
 }
