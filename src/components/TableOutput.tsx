@@ -24,21 +24,25 @@ export default function TableOutput({ data, hasHeader } : TableOutputProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row, idx) =>
-            idx === 0 ? null : (
-              <TableRow key={row[0]} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                {row.map((val, idx) =>
-                  idx === 0 ? (
-                    <TableCell component="th" scope="row">
-                      {val}
-                    </TableCell>
-                  ) : (
-                    <TableCell align="right">{val}</TableCell>
-                  )
-                )}
-              </TableRow>
-            )
-          )}
+          {data.map((row, idx) => {
+            if (idx === 0) {
+              return null;
+            } else {
+              return (
+                <TableRow key={row[0]} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                  {row.map((val, idx) =>
+                    idx === 0 ? (
+                      <TableCell component="th" scope="row">
+                        {val}
+                      </TableCell>
+                    ) : (
+                      <TableCell align="right">{val}</TableCell>
+                    )
+                  )}
+                </TableRow>
+              );
+            }
+          })}
         </TableBody>
       </Table>
     </TableContainer>
