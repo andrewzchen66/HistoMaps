@@ -29,7 +29,7 @@ export const searchColumnData: {
 } = {
   "./desserts/path": {
     // basic searches
-    Calories: {
+    "Fat": {
       "20%": [
         ["Dessert", "Calories", "Fat"],
         ["Yoghurt", "50", "20%"],
@@ -41,20 +41,20 @@ export const searchColumnData: {
       ],
     },
     // basic searches
-    Dessert: {
-      Chocolate: [
+    "Dessert": {
+      "Chocolate": [
         ["Dessert", "Calories", "Fat"],
         ["Chocolate", "10", "5%"],
       ],
-      Yoghurt: [
+      "Yoghurt": [
         ["Dessert", "Calories", "Fat"],
         ["Yoghurt", "50", "20%"],
       ],
     },
-    Fat: {},
+    "Calories": {},
   },
   "./sports/path": {
-    Stat: {
+    "Stat": {
       // search value with column provided
       "9": [
         ["Sports", "Popularity", "State", "Stat"],
@@ -63,23 +63,25 @@ export const searchColumnData: {
       ],
     },
     // Nonexistent search values with headers
-    State: {
-      MA: [["Sports", "Popularity", "State", "Stat"]],
-      Hockey: [["Sports", "Popularity", "State", "Stat"]],
+    "State": {
+      "MA": [[]],
+      "Hockey": [[]],
     },
-    Sports: {},
-    Popularity: {},
+    "Sports": {},
+    "Popularity": {},
   },
   "./no_header_sports/path": {
     // search by column with index
-    0: {},
-    1: {
+    "0": {},
+    "1": {
       "10": [["Basketball", "10", "CA", "9"]],
+      "9": [["Football", "9", "AZ", "1"]],
+      "8": [["Hockey", "8", "TX", "9"]],
       // Nonexistent search values without headers
       "5": [[]],
     },
-    2: {},
-    3: {},
+    "2": {},
+    "3": {},
   },
   "./empty": {},
 };
@@ -100,10 +102,12 @@ export const searchAllData: {
       ["Hockey", "8", "TX", "9"],
     ],
     // No matches with header
-    Quidditch: [["Sports", "Popularity", "State", "Stat"]],
+    "Quidditch": [[]],
   },
   // No matches without header
   "./no_header_sports/path": {
-    Quidditch: [[]],
+    "Quidditch": [[]],
   },
+  "./desserts/path": {},
+  "./empty": {},
 };

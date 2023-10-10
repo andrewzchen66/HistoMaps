@@ -41,20 +41,20 @@ export const mockSearchCSV = (
     success = false;
     message = "No file path loaded";
   } else if (column) {
-    if (searchColumnData[filePath][column][value]) {
+    if (searchColumnData[filePath][column]) {
       success = true;
-      message = searchColumnData[filePath][column][value];
+      message = searchColumnData[filePath][column][value]
+        ? searchColumnData[filePath][column][value]
+        : [[]];
     } else {
       success = false;
       message = "Invalid search command: column not found in " + filePath;
     }
   } else {
     success = true;
-    if (searchAllData[filePath][value]) {
-      message = searchAllData[filePath][value];
-    } else {
-      message = [[]];
-    }
+    message = searchAllData[filePath][value]
+      ? searchAllData[filePath][value]
+      : [[]];
   }
   return {
     success: success,

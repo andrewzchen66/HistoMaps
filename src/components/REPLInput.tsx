@@ -24,7 +24,7 @@ export function REPLInput({
   const [filePath, setFilePath] = useState<string>("");
 
   function handleSubmit(input: string) {
-    const parsedCommand: string[] = commandString.split(" ");
+    const parsedCommand: string[] = commandString.trim().split(" ");
     let output: string | string[][];
     let changedMode: boolean = false;
     switch (parsedCommand[0]) {
@@ -78,14 +78,21 @@ export function REPLInput({
       }
 
       case "search": {
-        if (parsedCommand.length != 3) {
-          output =
-            "Invalid search command: must provide 2 arguments, column and value to search";
+        if (parsedCommand.length < 2) {
+          output = "Invalid search command: must provide a value to search";
+        } else if (parsedCommand.length > 3) {
+          output = "Invalid search command: only accepts 2 arguments, value to search and column"
+        } else if (parsedCommand.length === 3) {
+          const { success, message }: FetchedAPIData = mockSearchCSV(
+            filePath,
+            parsedCommand[2],
+            parsedCommand[1]
+          );
+          output = message;
         } else {
           const { success, message }: FetchedAPIData = mockSearchCSV(
             filePath,
-            parsedCommand[1],
-            parsedCommand[2]
+            parsedCommand[1]
           );
           output = message;
         }

@@ -46,7 +46,10 @@ export function REPLHistory({ history }: REPLHistoryProps) {
               {typeof commandInfo.output === "string" ? (
                 <p>{"Output: " + commandInfo.output}</p>
               ) : (
+                <>
+                <p>Output: </p>
                 <TableOutput data={commandInfo.output} hasHeader={true} />
+                </>
               )}
             </Paper>
           )}
