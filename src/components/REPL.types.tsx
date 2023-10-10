@@ -3,3 +3,8 @@ export interface CommandInfo {
   output: string | string[][];
   isBrief: boolean;
 }
+
+export interface FetchedAPIData {
+  success: boolean;
+  message: string | string[][];
+}

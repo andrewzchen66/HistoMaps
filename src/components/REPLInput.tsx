@@ -1,9 +1,10 @@
 import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
-import { CommandInfo } from "./REPL.types";
-import csvData from "./MockedData";
+import { CommandInfo, FetchedAPIData } from "./REPL.types";
+import csvData from "../mock/MockedData";
 import Table from "@mui/material/Table";
+import { mockLoadCSV, mockViewCSV, mockSearchCSV } from "../mock/MockAPICalls";
 
 interface REPLInputProps {
   history: CommandInfo[];
@@ -28,8 +29,10 @@ export function REPLInput({
     let changedMode: boolean = false;
     switch (parsedCommand[0]) {
       case "mode": {
-        if (parsedCommand.length != 2) {
-          output = "Invalid mode command: only 1 argument";
+        if (parsedCommand.length == 1) {
+          output = "Invalid mode command: only 1 argument allowed";
+        } else if (parsedCommand.length > 2) {
+          output = "Invalid mode command: too many arguments provided";
         } else if (parsedCommand[1] == "brief") {
           if (!isBrief) {
             setIsBrief(true);
@@ -53,28 +56,40 @@ export function REPLInput({
           output =
             "Invalid load_file command: only file path should be given as argument";
         } else {
-          if (csvData[parsedCommand[1]]) {
+          const { success, message }: FetchedAPIData = mockLoadCSV(
+            parsedCommand[1]
+          );
+          if (success) {
             setFilePath(parsedCommand[1]);
-            output = "Succesfully loaded in csv file";
-          } else {
-            output = "Invalid file path";
           }
+          output = message;
         }
         break;
       }
 
       case "view": {
         if (parsedCommand.length != 1) {
-          output = "Invalid load_file command: no arguments should be given";
+          output = "Invalid view command: no arguments should be given";
         } else {
-          if (filePath != "") {
-            output = csvData[filePath];
-          } else {
-            output = "No file path loaded";
-          }
+          const { success, message }: FetchedAPIData = mockViewCSV(filePath);
+          output = message;
         }
         break;
       }
+
+      // case "search": {
+      //   if (parsedCommand.length != 3) {
+      //     output =
+      //       "Invalid search command: must provide 2 arguments, column and value to search";
+      //   } else {
+      //     if (filePath != "") {
+      //       output = csvData[filePath];
+      //     } else {
+      //       output = "No file path loaded";
+      //     }
+      //   }
+      //   break;
+      // }
 
       default: {
         output = "Invalid command: enter mode, load_file, view, or search";
@@ -91,10 +106,7 @@ export function REPLInput({
       })
     );
   }
-  /**
-   * We suggest breaking down this component into smaller components, think about the individual pieces
-   * of the REPL and how they connect to each other...
-   */
+
   return (
     <div className="repl-input">
       <fieldset>
@@ -106,7 +118,7 @@ export function REPLInput({
           onSubmit={() => handleSubmit(commandString)}
         />
       </fieldset>
-      <button onClick={() => handleSubmit(commandString)}>Submitted</button>
+      <button onClick={() => handleSubmit(commandString)}>Submit</button>
     </div>
   );
 }
