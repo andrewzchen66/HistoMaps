@@ -2,7 +2,7 @@ import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
 import { CommandInfo, FetchedAPIData } from "./REPL.types";
-import csvData from "../mock/MockedData";
+// import csvData from "../mock/MockedData";
 import Table from "@mui/material/Table";
 import { mockLoadCSV, mockViewCSV, mockSearchCSV } from "../mock/MockAPICalls";
 
@@ -77,19 +77,20 @@ export function REPLInput({
         break;
       }
 
-      // case "search": {
-      //   if (parsedCommand.length != 3) {
-      //     output =
-      //       "Invalid search command: must provide 2 arguments, column and value to search";
-      //   } else {
-      //     if (filePath != "") {
-      //       output = csvData[filePath];
-      //     } else {
-      //       output = "No file path loaded";
-      //     }
-      //   }
-      //   break;
-      // }
+      case "search": {
+        if (parsedCommand.length != 3) {
+          output =
+            "Invalid search command: must provide 2 arguments, column and value to search";
+        } else {
+          const { success, message }: FetchedAPIData = mockSearchCSV(
+            filePath,
+            parsedCommand[1],
+            parsedCommand[2]
+          );
+          output = message;
+        }
+        break;
+      }
 
       default: {
         output = "Invalid command: enter mode, load_file, view, or search";

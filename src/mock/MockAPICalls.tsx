@@ -1,4 +1,4 @@
-import csvData from "./MockedData";
+import { csvData } from "./MockedData";
 import { FetchedAPIData } from "../components/REPL.types";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -32,6 +32,18 @@ export const mockViewCSV = (filePath: string): FetchedAPIData => {
 
 export const mockSearchCSV = (
   filePath: string,
-  column: string,
-  value: string
-) => {};
+  value: string,
+  column?: string
+) => {
+  if (filePath == "") {
+    return {
+      success: false,
+      message: "No file path loaded",
+    };
+  } else {
+    return {
+      success: true,
+      message: "bruh",
+    };
+  }
+};
