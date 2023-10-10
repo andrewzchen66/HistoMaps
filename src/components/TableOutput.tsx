@@ -16,16 +16,24 @@ export default function TableOutput({ data, hasHeader } : TableOutputProps) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            {data[0].map((header, idx) =>
-              idx === 0 ? <TableCell>{header}</TableCell> : <TableCell align="right">{header}</TableCell>
-            )}
-          </TableRow>
-        </TableHead>
+        {hasHeader && (
+          <TableHead>
+            <TableRow>
+              {data[0].map((header, idx) =>
+                idx === 0 ? (
+                  <TableCell style={{ fontWeight: "bold" }}>{header}</TableCell>
+                ) : (
+                  <TableCell align="right" style={{ fontWeight: "bold" }}>
+                    {header}
+                  </TableCell>
+                )
+              )}
+            </TableRow>
+          </TableHead>
+        )}
         <TableBody>
           {data.map((row, idx) => {
-            if (idx === 0) {
+            if (hasHeader && idx === 0) {
               return null;
             } else {
               return (
