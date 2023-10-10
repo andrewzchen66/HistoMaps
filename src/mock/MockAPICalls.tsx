@@ -33,7 +33,8 @@ export const mockViewCSV = (filePath: string): FetchedAPIData => {
 export const mockSearchCSV = (
   filePath: string,
   value: string,
-  column?: string
+  containsHeader: boolean,
+  column?: string | number
 ) => {
   let success: boolean;
   let message: string | string[][];
@@ -43,18 +44,30 @@ export const mockSearchCSV = (
   } else if (column) {
     if (searchColumnData[filePath][column]) {
       success = true;
-      message = searchColumnData[filePath][column][value]
-        ? searchColumnData[filePath][column][value]
-        : [[]];
+      if (containsHeader) {
+        message = searchColumnData[filePath][column][value]
+          ? searchColumnData[filePath][column][value]
+          : [csvData[filePath][0]];
+      } else {
+        message = searchColumnData[filePath][column][value]
+          ? searchColumnData[filePath][column][value]
+          : [[]];
+      }
     } else {
       success = false;
       message = "Invalid search command: column not found in " + filePath;
     }
   } else {
     success = true;
-    message = searchAllData[filePath][value]
-      ? searchAllData[filePath][value]
-      : [[]];
+    if (containsHeader) {
+      message = searchAllData[filePath][value]
+        ? searchAllData[filePath][value]
+        : [csvData[filePath][0]];
+    } else {
+      message = searchAllData[filePath][value]
+        ? searchAllData[filePath][value]
+        : [[]];
+    }
   }
   return {
     success: success,

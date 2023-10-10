@@ -72,16 +72,16 @@ export const searchColumnData: {
   },
   "./no_header_sports/path": {
     // search by column with index
-    "0": {},
-    "1": {
-      "10": [["Basketball", "10", "CA", "9"]],
-      "9": [["Football", "9", "AZ", "1"]],
-      "8": [["Hockey", "8", "TX", "9"]],
+    0: {},
+    1: {
+      10: [["Basketball", "10", "CA", "9"]],
+      9: [["Football", "9", "AZ", "1"]],
+      8: [["Hockey", "8", "TX", "9"]],
       // Nonexistent search values without headers
-      "5": [[]],
+      5: [[]],
     },
-    "2": {},
-    "3": {},
+    2: {},
+    3: {},
   },
   "./empty": {},
 };
