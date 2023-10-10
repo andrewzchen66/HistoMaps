@@ -20,10 +20,11 @@ export const csvData: { [key: string]: string[][] } = {
   "./empty": [[]],
 };
 
-// filePath: {column : {value}}
-export const searchData: {
+// Searches with column provided
+// filePath: {column : {value: result}}
+export const searchColumnData: {
   [key: string]: {
-    [key: string | number]: string[][] | { [key: string]: string[][] };
+    [key: string | number]: { [key: string]: string[][] };
   };
 } = {
   "./desserts/path": {
@@ -53,15 +54,8 @@ export const searchData: {
     Fat: {},
   },
   "./sports/path": {
-    // search value without column provided
-    "9": [
-      ["Sports", "Popularity", "State", "Stat"],
-      ["Basketball", "10", "CA", "9"],
-      ["Football", "9", "AZ", "1"],
-      ["Hockey", "8", "TX", "9"],
-    ],
     Stat: {
-      // same search value with column provided
+      // search value with column provided
       "9": [
         ["Sports", "Popularity", "State", "Stat"],
         ["Basketball", "10", "CA", "9"],
@@ -73,7 +67,6 @@ export const searchData: {
       MA: [["Sports", "Popularity", "State", "Stat"]],
       Hockey: [["Sports", "Popularity", "State", "Stat"]],
     },
-    Quidditch: [["Sports", "Popularity", "State", "Stat"]],
     Sports: {},
     Popularity: {},
   },
@@ -89,4 +82,28 @@ export const searchData: {
     3: {},
   },
   "./empty": {},
+};
+
+// Searches without column provided
+// filePath: {value : result}
+export const searchAllData: {
+  [key: string]: {
+    [key: string | number]: string[][];
+  };
+} = {
+  "./sports/path": {
+    // search value without column provided
+    "9": [
+      ["Sports", "Popularity", "State", "Stat"],
+      ["Basketball", "10", "CA", "9"],
+      ["Football", "9", "AZ", "1"],
+      ["Hockey", "8", "TX", "9"],
+    ],
+    // No matches with header
+    Quidditch: [["Sports", "Popularity", "State", "Stat"]],
+  },
+  // No matches without header
+  "./no_header_sports/path": {
+    Quidditch: [[]],
+  },
 };

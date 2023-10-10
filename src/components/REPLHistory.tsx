@@ -2,14 +2,13 @@ import { useEffect, useRef } from "react";
 import "../styles/main.css";
 import { CommandInfo } from "./REPL.types";
 import TableOutput from "./TableOutput";
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
 
 interface REPLHistoryProps {
-  history: CommandInfo[],
+  history: CommandInfo[];
 }
 
 export function REPLHistory({ history }: REPLHistoryProps) {
-  
   const historyEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -17,15 +16,21 @@ export function REPLHistory({ history }: REPLHistoryProps) {
       const container = historyEndRef.current.parentElement;
       container.scrollTop = container.scrollHeight;
     }
-  }, [history])
+  }, [history]);
 
   return (
-    <div className="repl-history" style={{ alignItems: "center", scrollBehavior: "smooth" }}>
+    <div
+      className="repl-history"
+      style={{ alignItems: "center", scrollBehavior: "smooth" }}
+    >
       {/* This is where command history will go */}
       {history.map((commandInfo, index) => (
         <div key={index}>
           {commandInfo.isBrief ? (
-            <Paper elevation={3} sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}>
+            <Paper
+              elevation={3}
+              sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}
+            >
               {typeof commandInfo.output === "string" ? (
                 <p>{commandInfo.output}</p>
               ) : (
@@ -33,10 +38,13 @@ export function REPLHistory({ history }: REPLHistoryProps) {
               )}
             </Paper>
           ) : (
-            <Paper elevation={3} sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}>
+            <Paper
+              elevation={3}
+              sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}
+            >
               <p>{"Command: " + commandInfo.command}</p>
               {typeof commandInfo.output === "string" ? (
-                <p>{commandInfo.output}</p>
+                <p>{"Output: " + commandInfo.output}</p>
               ) : (
                 <TableOutput data={commandInfo.output} hasHeader={true} />
               )}

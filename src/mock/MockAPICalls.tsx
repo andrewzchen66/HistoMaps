@@ -1,4 +1,4 @@
-import { csvData } from "./MockedData";
+import { csvData, searchAllData, searchColumnData } from "./MockedData";
 import { FetchedAPIData } from "../components/REPL.types";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -35,15 +35,29 @@ export const mockSearchCSV = (
   value: string,
   column?: string
 ) => {
+  let success: boolean;
+  let message: string | string[][];
   if (filePath == "") {
-    return {
-      success: false,
-      message: "No file path loaded",
-    };
+    success = false;
+    message = "No file path loaded";
+  } else if (column) {
+    if (searchColumnData[filePath][column][value]) {
+      success = true;
+      message = searchColumnData[filePath][column][value];
+    } else {
+      success = false;
+      message = "Invalid search command: column not found in " + filePath;
+    }
   } else {
-    return {
-      success: true,
-      message: "bruh",
-    };
+    success = true;
+    if (searchAllData[filePath][value]) {
+      message = searchAllData[filePath][value];
+    } else {
+      message = [[]];
+    }
   }
+  return {
+    success: success,
+    message: message,
+  };
 };
