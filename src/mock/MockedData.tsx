@@ -1,3 +1,4 @@
+// maps filePath to csv contents
 export const csvData: { [key: string]: string[][] } = {
   "./desserts/path": [
     ["Dessert", "Calories", "Fat"],

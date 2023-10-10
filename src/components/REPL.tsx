@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import '../styles/main.css';
-import { REPLHistory } from './REPLHistory';
-import { REPLInput } from './REPLInput';
-import { stringify } from 'querystring';
-import { CommandInfo } from './REPL.types';
+import { useState, useEffect } from "react";
+import "../styles/main.css";
+import { REPLHistory } from "./REPLHistory";
+import { REPLInput } from "./REPLInput";
+import { stringify } from "querystring";
+import { CommandInfo } from "./REPL.types";
 
 /* 
   You'll want to expand this component (and others) for the sprints! Remember 
@@ -14,22 +14,20 @@ import { CommandInfo } from './REPL.types';
   You don't need to do that for this gearup.
 */
 
-
 export default function REPL() {
-
-  // TODO: Add some kind of shared state that holds all the commands submitted.
-  const [history, setHistory] = useState<CommandInfo[]>([])
-  const [isBrief, setIsBrief] = useState<boolean>(true)
+  const [history, setHistory] = useState<CommandInfo[]>([]);
+  const [isBrief, setIsBrief] = useState<boolean>(true);
 
   return (
-    <div className="repl">  
-      {/*This is where your REPLHistory might go... You also may choose to add it within your REPLInput 
-      component or somewhere else depending on your component organization. What are the pros and cons of each? */}
-      {/* CHANGED */}
-      <REPLHistory history ={history} />
+    <div className="repl">
+      <REPLHistory history={history} />
       <hr></hr>
-      {/* CHANGED */}
-      <REPLInput history={history} setHistory={setHistory} isBrief={isBrief} setIsBrief={setIsBrief}/>
+      <REPLInput
+        history={history}
+        setHistory={setHistory}
+        isBrief={isBrief}
+        setIsBrief={setIsBrief}
+      />
     </div>
   );
 }
