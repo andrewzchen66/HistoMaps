@@ -6,6 +6,7 @@ import { CommandInfo, FetchedAPIData, TableOutput } from "./REPL.types";
 import Table from "@mui/material/Table";
 import { mockLoadCSV, mockViewCSV, mockSearchCSV } from "../mock/MockAPICalls";
 
+
 interface REPLInputProps {
   history: CommandInfo[];
   setHistory: Dispatch<SetStateAction<CommandInfo[]>>;

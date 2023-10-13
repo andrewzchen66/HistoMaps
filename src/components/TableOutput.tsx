@@ -10,12 +10,13 @@ import Paper from "@mui/material/Paper";
 interface TableOutputProps {
     data : string[][],
     hasHeader: boolean,
+    ariaLabel: string,
 }
 
-export default function TableOutput({ data, hasHeader } : TableOutputProps) {
+export default function TableOutput({ data, hasHeader, ariaLabel } : TableOutputProps) {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label={ariaLabel}>
         {hasHeader && (
           <TableHead>
             <TableRow>
