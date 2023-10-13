@@ -199,3 +199,16 @@ test('load view search brief verbose', async ({ page }) => {
     await expect(page.getByLabel('output-7').getByRole('rowheader', { name: 'Football' })).toBeInViewport()
     await expect(page.getByLabel('output-7').getByRole('rowheader', { name: 'Hockey' })).toBeInViewport()
 });
+
+// tests for undefined commands
+test('undefined commands', async ({ page }) => {
+  
+    await page.getByLabel('Command input').fill('loadidadida skrrrrrr');
+    await page.getByLabel('Command input').press('Enter');
+    const mock_input = "Invalid command: enter mode, load_file, view, or search"
+    await expect(page.getByLabel('output-0')).toHaveText(mock_input)
+
+    await page.getByLabel('Command input').fill('load_csv ./empty');
+    await page.getByLabel('Command input').press('Enter');
+    await expect(page.getByLabel('output-1')).toHaveText(mock_input)
+});
