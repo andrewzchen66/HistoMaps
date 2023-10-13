@@ -32,9 +32,10 @@ export function REPLHistory({ history }: REPLHistoryProps) {
               sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}
             >
               {typeof commandInfo.output === "string" ? (
-                <p>{commandInfo.output}</p>
+                <p aria-label={"output-" + index}>{commandInfo.output}</p>
               ) : (
                 <TableOutput
+                  ariaLabel={"output-" + index}
                   data={commandInfo.output.data}
                   hasHeader={commandInfo.output.hasHeader}
                 />
@@ -45,13 +46,18 @@ export function REPLHistory({ history }: REPLHistoryProps) {
               elevation={3}
               sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}
             >
-              <p>{"Command: " + commandInfo.command}</p>
+              <p aria-label={"command-" + index}>
+                {"Command: " + commandInfo.command}
+              </p>
               {typeof commandInfo.output === "string" ? (
-                <p>{"Output: " + commandInfo.output}</p>
+                <p aria-label={"output-" + index}>
+                  {"Output: " + commandInfo.output}
+                </p>
               ) : (
                 <>
                   <p>Output: </p>
                   <TableOutput
+                    ariaLabel={"output-" + index}
                     data={commandInfo.output.data}
                     hasHeader={commandInfo.output.hasHeader}
                   />
