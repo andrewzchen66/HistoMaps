@@ -2,10 +2,12 @@
 
 # Server Documentation
 
-### Contributers
+## Contributers
 
 Andrew Chen: azchen
-Allan Wang: allenwang1536
+
+Allen Wang: awang299
+
 Total Estimated Time: 15 hours
 
 ## Downloading and Setup
@@ -21,11 +23,11 @@ Total Estimated Time: 15 hours
 
 The web application's main functionality is to aid a real estate appraiser in processing and exploring data from a CSV file. The application is a terminal-like interface with an input box and history display. There are several commands that are supported, any other commands entered that don't fit the specifications will produce invalid output. Both valid and invalid outputs will be stored and displayed in the history.
 
-### mode <displayType>
+### mode (displayType)
 
 Users can choose between "mode brief" or "mode verbose" when displaying output. Brief will display only the output, verbose will display the command and output on two lines.
 
-### load_file <filePath> <containsHeader?>
+### load_file (filePath) (containsHeader?)
 
 Users can load a csv file into the application to perform view and search on using its filepath, and can optionally specify if the file contains a header with "true" or "false" argument. Default if unspecified is true. Returns invalid output if filepath doesn't exist.
 
@@ -33,7 +35,7 @@ Users can load a csv file into the application to perform view and search on usi
 
 Users can view the contents of file in a readable table format. Returns invalid output if no file has been successfully loaded yet.
 
-### search <column?> <value>
+### search (column?) (value)
 
 Users can search and filter the contents of a file for rows that contain the value being searched for in the specified column, if column is provided. If not, just search for the value in the entire table. The column can argument can be the name of the header or the column index if no header exists. Displays the header (if it exists) and the searched rows in a readable table format. Returns invalid output if no file has been successfully loaded yet, or if column doesn't exist.
 
@@ -100,6 +102,7 @@ All of the mocked noncomponent functions in this file will return a FetchedAPIDa
 We used Playwright to script state interactions to be able to test the frontend. To run the test suite, enter the following:
 
 "npm install playwright"
+
 "npx playwright test"
 
 We performed specific tests that would execute on-load of the web app to test that the initial format of the page is accurate and all the components exist.
