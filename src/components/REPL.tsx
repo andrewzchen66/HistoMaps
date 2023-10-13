@@ -16,7 +16,6 @@ import { CommandInfo } from "../interfaces/REPL.types";
 
 export default function REPL() {
   const [history, setHistory] = useState<CommandInfo[]>([]);
-  const [isBrief, setIsBrief] = useState<boolean>(true);
 
   return (
     <div className="repl">
@@ -26,8 +25,6 @@ export default function REPL() {
         // aria-label="Command input"
         history={history}
         setHistory={setHistory}
-        isBrief={isBrief}
-        setIsBrief={setIsBrief}
       />
     </div>
   );

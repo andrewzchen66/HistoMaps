@@ -10,23 +10,16 @@ import {
 import Table from "@mui/material/Table";
 import { mockLoadCSV, mockViewCSV, mockSearchCSV } from "../mock/MockAPICalls";
 
-
 interface REPLInputProps {
   history: CommandInfo[];
   setHistory: Dispatch<SetStateAction<CommandInfo[]>>;
-  isBrief: boolean;
-  setIsBrief: Dispatch<SetStateAction<boolean>>;
 }
 
-export function REPLInput({
-  history,
-  setHistory,
-  isBrief,
-  setIsBrief,
-}: REPLInputProps) {
+export function REPLInput({ history, setHistory }: REPLInputProps) {
   // Manages the contents of the input box
   const [commandString, setCommandString] = useState<string>("");
   const [filePath, setFilePath] = useState<string>("");
+  const [isBrief, setIsBrief] = useState<boolean>(true);
   const [containsHeader, setContainsHeader] = useState<boolean>(true);
 
   function handleSubmit(input: string) {
