@@ -3,7 +3,7 @@ import "../styles/main.css";
 import { REPLHistory } from "./REPLHistory";
 import { REPLInput } from "./REPLInput";
 import { stringify } from "querystring";
-import { CommandInfo } from "./REPL.types";
+import { CommandInfo } from "../interfaces/REPL.types";
 
 /* 
   You'll want to expand this component (and others) for the sprints! Remember 

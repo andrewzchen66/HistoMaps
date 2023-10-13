@@ -23,7 +23,7 @@ export const csvData: { [key: string]: string[][] } = {
 };
 
 // Searches with column provided
-// filePath: {column : {value: result}}
+// {filePath: {column : {value: result}}}
 export const searchColumnData: {
   [key: string]: {
     [key: string | number]: { [key: string]: string[][] };
@@ -90,7 +90,7 @@ export const searchColumnData: {
 };
 
 // Searches without column provided
-// filePath: {value : result}
+// {filePath: {value : result}}
 export const searchAllData: {
   [key: string]: {
     [key: string | number]: string[][];

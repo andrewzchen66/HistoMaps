@@ -1,7 +1,11 @@
 import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
-import { CommandInfo, FetchedAPIData, TableOutput } from "./REPL.types";
+import {
+  CommandInfo,
+  FetchedAPIData,
+  TableOutput,
+} from "../interfaces/REPL.types";
 // import csvData from "../mock/MockedData";
 import Table from "@mui/material/Table";
 import { mockLoadCSV, mockViewCSV, mockSearchCSV } from "../mock/MockAPICalls";
@@ -31,7 +35,8 @@ export function REPLInput({
     switch (parsedCommand[0]) {
       case "mode": {
         if (parsedCommand.length < 2) {
-          output = "Invalid mode command: must provide brief or verbose argument";
+          output =
+            "Invalid mode command: must provide brief or verbose argument";
         } else if (parsedCommand.length > 2) {
           output = "Invalid mode command: too many arguments provided";
         } else if (parsedCommand[1] == "brief") {
@@ -54,30 +59,38 @@ export function REPLInput({
 
       case "load_file": {
         if (parsedCommand.length < 2) {
-          output = "Invalid load_file command: file path should be given as argument";
+          output =
+            "Invalid load_file command: file path should be given as argument";
         } else if (parsedCommand.length > 3) {
-          output = "Invalid load_file command: only accepted arguments are filepath and containsHeader";
+          output =
+            "Invalid load_file command: only accepted arguments are filepath and containsHeader";
         } else if (parsedCommand.length === 2) {
           const { success, message }: FetchedAPIData = mockLoadCSV(
             parsedCommand[1]
           );
           if (success) {
             setFilePath(parsedCommand[1]);
-            setContainsHeader(true)
+            setContainsHeader(true);
           }
           output = message + ". Default true for containsHeader";
-        } else if (parsedCommand[2] !== "true" && parsedCommand[2] !== "false") {
-          output = "Invalid load_file command: containsHeader can only be true or false";
+        } else if (
+          parsedCommand[2] !== "true" &&
+          parsedCommand[2] !== "false"
+        ) {
+          output =
+            "Invalid load_file command: containsHeader can only be true or false";
         } else {
           const { success, message }: FetchedAPIData = mockLoadCSV(
             parsedCommand[1]
           );
           if (success) {
             setFilePath(parsedCommand[1]);
-            parsedCommand[2] === "true" ? setContainsHeader(true) : setContainsHeader(false);
+            parsedCommand[2] === "true"
+              ? setContainsHeader(true)
+              : setContainsHeader(false);
           }
 
-          if (typeof(message) == "string") {
+          if (typeof message == "string") {
             output = message;
           } else {
             output = "Error";
@@ -91,13 +104,13 @@ export function REPLInput({
           output = "Invalid view command: no arguments should be given";
         } else {
           const { success, message }: FetchedAPIData = mockViewCSV(filePath);
-          if (typeof(message) !== "string") {
+          if (typeof message !== "string") {
             output = {
               data: message,
               hasHeader: containsHeader,
             };
           } else {
-            output = message
+            output = message;
           }
         }
         break;
@@ -107,40 +120,43 @@ export function REPLInput({
         if (parsedCommand.length < 2) {
           output = "Invalid search command: must provide a value to search";
         } else if (parsedCommand.length > 3) {
-          output = "Invalid search command: only accepts 2 arguments, value to search and column"
+          output =
+            "Invalid search command: only accepts 2 arguments, value to search and column";
         } else if (parsedCommand.length === 3) {
           if (containsHeader) {
-            const column: string | number = containsHeader ? parsedCommand[1] : parseInt(parsedCommand[1]);
+            const column: string | number = containsHeader
+              ? parsedCommand[1]
+              : parseInt(parsedCommand[1]);
             const { success, message }: FetchedAPIData = mockSearchCSV(
               filePath,
               parsedCommand[2],
               containsHeader,
               column
             );
-            if (typeof(message) !== "string") {
+            if (typeof message !== "string") {
               output = {
                 data: message,
                 hasHeader: containsHeader,
               };
             } else {
-              output = message
+              output = message;
             }
           } else {
-            output = "Invalid search command: " + filePath + " has no headers"
+            output = "Invalid search command: " + filePath + " has no headers";
           }
         } else {
           const { success, message }: FetchedAPIData = mockSearchCSV(
             filePath,
             parsedCommand[1],
-            containsHeader,
+            containsHeader
           );
-          if (typeof(message) !== "string") {
+          if (typeof message !== "string") {
             output = {
               data: message,
               hasHeader: containsHeader,
             };
           } else {
-            output = message
+            output = message;
           }
         }
         break;

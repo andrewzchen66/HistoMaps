@@ -1,5 +1,5 @@
 import { csvData, searchAllData, searchColumnData } from "./MockedData";
-import { FetchedAPIData } from "../components/REPL.types";
+import { FetchedAPIData } from "../interfaces/REPL.types";
 
 // mocks loadCSV backend call
 export const mockLoadCSV = (filepath: string): FetchedAPIData => {
