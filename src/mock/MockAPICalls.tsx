@@ -1,6 +1,7 @@
 import { csvData, searchAllData, searchColumnData } from "./MockedData";
 import { FetchedAPIData } from "../components/REPL.types";
 
+// mocks loadCSV backend call
 export const mockLoadCSV = (filepath: string): FetchedAPIData => {
   if (csvData[filepath]) {
     return {
@@ -15,6 +16,7 @@ export const mockLoadCSV = (filepath: string): FetchedAPIData => {
   }
 };
 
+// mocks viewCSV backend call
 export const mockViewCSV = (filePath: string): FetchedAPIData => {
   if (filePath != "") {
     return {
@@ -29,6 +31,7 @@ export const mockViewCSV = (filePath: string): FetchedAPIData => {
   }
 };
 
+// mocks searchCSV backend call
 export const mockSearchCSV = (
   filePath: string,
   value: string,

@@ -1,3 +1,4 @@
+// maps filePath to csv contents
 export const csvData: { [key: string]: string[][] } = {
   "./desserts/path": [
     ["Dessert", "Calories", "Fat"],
@@ -18,6 +19,7 @@ export const csvData: { [key: string]: string[][] } = {
     ["Hockey", "8", "TX", "9"],
   ],
   "./empty": [[]],
+  "./single_col": [["hello"], ["world"], ["123"]],
 };
 
 // Searches with column provided
@@ -84,6 +86,7 @@ export const searchColumnData: {
     3: {},
   },
   "./empty": {},
+  "./single_col": {},
 };
 
 // Searches without column provided
@@ -110,4 +113,5 @@ export const searchAllData: {
   },
   "./desserts/path": {},
   "./empty": {},
+  "./single_col": {},
 };
