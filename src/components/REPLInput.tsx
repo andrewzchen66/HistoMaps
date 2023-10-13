@@ -1,7 +1,7 @@
 import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
-import { CommandInfo, FetchedAPIData } from "./REPL.types";
+import { CommandInfo, FetchedAPIData, TableOutput } from "./REPL.types";
 // import csvData from "../mock/MockedData";
 import Table from "@mui/material/Table";
 import { mockLoadCSV, mockViewCSV, mockSearchCSV } from "../mock/MockAPICalls";
@@ -26,7 +26,7 @@ export function REPLInput({
 
   function handleSubmit(input: string) {
     const parsedCommand: string[] = commandString.trim().split(" ");
-    let output: string | string[][];
+    let output: string | TableOutput;
     let changedMode: boolean = false;
     switch (parsedCommand[0]) {
       case "mode": {
@@ -74,13 +74,14 @@ export function REPLInput({
           );
           if (success) {
             setFilePath(parsedCommand[1]);
-            if (parsedCommand[2] === "true") {
-              setContainsHeader(true)
-            } else {
-              setContainsHeader(false)
-            }
+            parsedCommand[2] === "true" ? setContainsHeader(true) : setContainsHeader(false);
           }
-          output = message;
+
+          if (typeof(message) == "string") {
+            output = message;
+          } else {
+            output = "Error";
+          }
         }
         break;
       }
@@ -90,7 +91,14 @@ export function REPLInput({
           output = "Invalid view command: no arguments should be given";
         } else {
           const { success, message }: FetchedAPIData = mockViewCSV(filePath);
-          output = message;
+          if (typeof(message) !== "string") {
+            output = {
+              data: message,
+              hasHeader: containsHeader,
+            };
+          } else {
+            output = message
+          }
         }
         break;
       }
@@ -102,14 +110,21 @@ export function REPLInput({
           output = "Invalid search command: only accepts 2 arguments, value to search and column"
         } else if (parsedCommand.length === 3) {
           if (containsHeader) {
-            const column: string | number = containsHeader ? parsedCommand[1] : parseInt(parsedCommand[1])
+            const column: string | number = containsHeader ? parsedCommand[1] : parseInt(parsedCommand[1]);
             const { success, message }: FetchedAPIData = mockSearchCSV(
-            filePath,
-            parsedCommand[2],
-            containsHeader,
-            column
+              filePath,
+              parsedCommand[2],
+              containsHeader,
+              column
             );
-            output = message;
+            if (typeof(message) !== "string") {
+              output = {
+                data: message,
+                hasHeader: containsHeader,
+              };
+            } else {
+              output = message
+            }
           } else {
             output = "Invalid search command: " + filePath + " has no headers"
           }
@@ -119,7 +134,14 @@ export function REPLInput({
             parsedCommand[1],
             containsHeader,
           );
-          output = message;
+          if (typeof(message) !== "string") {
+            output = {
+              data: message,
+              hasHeader: containsHeader,
+            };
+          } else {
+            output = message
+          }
         }
         break;
       }

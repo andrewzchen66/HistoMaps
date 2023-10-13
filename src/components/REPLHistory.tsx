@@ -19,36 +19,27 @@ export function REPLHistory({ history }: REPLHistoryProps) {
   }, [history]);
 
   return (
-    <div
-      className="repl-history"
-      style={{ alignItems: "center", scrollBehavior: "smooth" }}
-    >
+    <div className="repl-history" style={{ alignItems: "center", scrollBehavior: "smooth" }}>
       {/* This is where command history will go */}
       {history.map((commandInfo, index) => (
         <div key={index}>
           {commandInfo.isBrief ? (
-            <Paper
-              elevation={3}
-              sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}
-            >
+            <Paper elevation={3} sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}>
               {typeof commandInfo.output === "string" ? (
                 <p>{commandInfo.output}</p>
               ) : (
-                <TableOutput data={commandInfo.output} hasHeader={true} />
+                <TableOutput data={commandInfo.output.data} hasHeader={commandInfo.output.hasHeader} />
               )}
             </Paper>
           ) : (
-            <Paper
-              elevation={3}
-              sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}
-            >
+            <Paper elevation={3} sx={{ maxWidth: "30rem", mx: "auto", py: "0.5rem", my: "0.5rem" }}>
               <p>{"Command: " + commandInfo.command}</p>
               {typeof commandInfo.output === "string" ? (
                 <p>{"Output: " + commandInfo.output}</p>
               ) : (
                 <>
-                <p>Output: </p>
-                <TableOutput data={commandInfo.output} hasHeader={true} />
+                  <p>Output: </p>
+                  <TableOutput data={commandInfo.output.data} hasHeader={commandInfo.output.hasHeader} />
                 </>
               )}
             </Paper>
