@@ -39,13 +39,25 @@ Users can search and filter the contents of a file for rows that contain the val
 
 ## State Variables
 
-### History
+### history
 
 Array of CommandInfos that maintains the ordering and corresponding metadata for every command inputed by the user. Each CommandInfo interface contains the command string, the output which is either a string or TableOutput, and boolean isBrief for whether the info should be displayed in brief or verbose mode.
 
+### commandString
+
+String representing the current command being entered in REPLInput. Gets parsed and interpreted after user submits inside the handleSubmit() function.
+
+### filePath
+
+String representing the current filepath loaded. The starting filepath with nothing loaded is "". Changes when load_file command is called.
+
 ### isBrief
 
-boolean representing what the current
+Boolean representing what the current mode is. Default is true because the app starts out in brief mode. Changes when mode command is called.
+
+### containsHeader
+
+Boolean representing if the currently loaded csv has a header. Default is true. Changes when load_file command is called.
 
 ## Components
 
@@ -90,4 +102,8 @@ We used Playwright to script state interactions to be able to test the frontend.
 "npm install playwright"
 "npx playwright test"
 
-We performed specific tests that would execute on load of the web app to test that the initial format of the page is accurate and all the components exist. We also wrote unit tests to test the specific functionality when load_file, view, and search commands are entered. This ensures that the functionality of these commands in isolation produce the expected UI results. We also implemented "integration tests" where we could make numerous calls to different commands in sequence to test their interactions with each other. An example would be loading a file then viewing it, then loading different file and viewing the new file. This testing scheme enables us to test the functionality's depth through detailed testing of edge cases for each command, as well as breadth through integrating various sequences together.
+We performed specific tests that would execute on load of the web app to test that the initial format of the page is accurate and all the components exist.
+
+We also wrote unit tests to test the specific functionality when mode, load_file, view, and search commands are entered. This ensures that the functionality of these commands in isolation produce the expected UI results, both for successes and errors. An example of this for mode would be testing that the initial mode is brief, calling mode brief would keep it brief, and calling mode verbose would switch to verbose.
+
+We also implemented "integration tests" where we could make numerous calls to different commands in sequence to test their interactions with each other. An example would be loading a file then viewing it, then loading different file and viewing the new file. This testing scheme enables us to test the functionality's depth through detailed testing of edge cases for each command, as well as breadth through integrating various sequences together.
