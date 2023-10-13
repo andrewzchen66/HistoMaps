@@ -21,7 +21,7 @@ Total Estimated Time: 15 hours
 
 The web application's main functionality is to aid a real estate appraiser in processing and exploring data from a CSV file. The application is a terminal-like interface with an input box and history display. There are several commands that are supported, any other commands entered that don't fit the specifications will produce invalid output. Both valid and invalid outputs will be stored and displayed in the history.
 
-### mode <format>
+### mode <displayType>
 
 Users can choose between "mode brief" or "mode verbose" when displaying output. Brief will display only the output, verbose will display the command and output on two lines.
 
@@ -93,7 +93,7 @@ The searchAllData is a hashmap of nested hashmaps, which is specifically used to
 
 ### MockAPICalls
 
-All of the mocked noncomponent functions in this file will return a FetchedAPIData structure containing a success boolean, and a message that will be displayed in the history which is either a string or array of strings. The functions mockViewCSV, mockSearchCSV, and mockLoadCSV simulate the respective commands in their names. There is some exception handling logic build into these mocks to succintly simulate a robust backend implementation.
+All of the mocked noncomponent functions in this file will return a FetchedAPIData structure containing a success boolean, and a message that will be displayed in the history which is either a string or array of strings. The functions mockViewCSV, mockSearchCSV, and mockLoadCSV simulate the respective commands in their names by fetching the mocked data from the hashmaps in MockedData.tsx. There is some exception handling logic built into these mocks to succintly simulate a more robust backend implementation.
 
 ## Testing
 
@@ -102,8 +102,8 @@ We used Playwright to script state interactions to be able to test the frontend.
 "npm install playwright"
 "npx playwright test"
 
-We performed specific tests that would execute on load of the web app to test that the initial format of the page is accurate and all the components exist.
+We performed specific tests that would execute on-load of the web app to test that the initial format of the page is accurate and all the components exist.
 
-We also wrote unit tests to test the specific functionality when mode, load_file, view, and search commands are entered. This ensures that the functionality of these commands in isolation produce the expected UI results, both for successes and errors. An example of this for mode would be testing that the initial mode is brief, calling mode brief would keep it brief, and calling mode verbose would switch to verbose.
+We also wrote "unit tests" to test the specific functionality when mode, load_file, view, and search commands are entered. This ensures that the functionality of these commands in isolation produce the expected UI results, both for successes and errors. An example of this for mode would be testing that the initial mode is brief, that calling mode brief would keep it brief, and that calling mode verbose would switch to verbose.
 
-We also implemented "integration tests" where we could make numerous calls to different commands in sequence to test their interactions with each other. An example would be loading a file then viewing it, then loading different file and viewing the new file. This testing scheme enables us to test the functionality's depth through detailed testing of edge cases for each command, as well as breadth through integrating various sequences together.
+We also implemented "integration tests" where we could make numerous calls to different commands in sequence to test their interactions with each other. An example would be loading a file then viewing it, then loading a different file and viewing the new file. This testing scheme enables us to test the functionality's depth through detailed testing of edge cases for each command, as well as breadth through integrating various sequences together.
