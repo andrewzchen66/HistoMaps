@@ -23,6 +23,7 @@ export default function REPL() {
       <REPLHistory history={history} />
       <hr></hr>
       <REPLInput
+        // aria-label="Command input"
         history={history}
         setHistory={setHistory}
         isBrief={isBrief}
