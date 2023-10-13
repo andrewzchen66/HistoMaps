@@ -1,6 +1,4 @@
-# Mock-awang299-azchen
-
-# Server Documentation
+# Mock Documentation
 
 ## Contributers
 
