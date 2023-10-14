@@ -15,6 +15,7 @@ interface REPLInputProps {
   setHistory: Dispatch<SetStateAction<CommandInfo[]>>;
 }
 
+// handles taking in input and updating history
 export function REPLInput({ history, setHistory }: REPLInputProps) {
   // Manages the contents of the input box
   const [commandString, setCommandString] = useState<string>("");

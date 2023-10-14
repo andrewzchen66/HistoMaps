@@ -8,6 +8,7 @@ interface REPLHistoryProps {
   history: CommandInfo[];
 }
 
+// handles the rednering of past history commands
 export function REPLHistory({ history }: REPLHistoryProps) {
   const historyEndRef = useRef<HTMLDivElement | null>(null);
 

@@ -13,6 +13,7 @@ interface TableOutputProps {
     ariaLabel: string,
 }
 
+// table output component for displaying parsed CSV output
 export default function TableOutput({ data, hasHeader, ariaLabel } : TableOutputProps) {
   return (
     <TableContainer component={Paper}>
